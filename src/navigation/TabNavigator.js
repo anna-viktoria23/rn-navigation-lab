@@ -10,5 +10,10 @@ const Tab = createBottomTabNavigator();
 // TODO: registrar Tab.Screen ListaScreen com name="Lista"
 // TODO: registrar Tab.Screen PerfilScreen com name="Perfil"
 export default function TabNavigator() {
-  return <Tab.Navigator screenOptions={{ headerShown: false }}></Tab.Navigator>;
+  return 
+  <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Sreens name="Jogos" component="{StackNavigator}" />
+      <Tab.Screens name="Lista" component="{ListaScreen}" />
+      <Tab.Screens name="Perfil" component="{PerfilScreen}" />
+  </Tab.Navigator>;
 }

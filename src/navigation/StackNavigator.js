@@ -9,6 +9,9 @@ const Stack = createNativeStackNavigator();
 // TODO: registrar Stack.Screen DetalheScreen com name="Detalhe"
 export default function StackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}></Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component="{HomeScreen}" />
+      <Stack.Screen name="Detalhe" component="{DetalheScreen}" />
+    </Stack.Navigator>
   );
 }

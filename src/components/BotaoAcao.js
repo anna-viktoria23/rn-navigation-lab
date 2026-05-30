@@ -17,19 +17,25 @@ export default function BotaoAcao({ texto, onPress, ativo }) {
 // TODO: ajustar as cores para o tema do seu app
 const styles = StyleSheet.create({
   botao: {
-    backgroundColor: '#333333',
+    backgroundColor: '#421625', // Estado padrão: Vinho intermediário sóbrio
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: 'center',
     marginHorizontal: 16,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#FF9F63', // Borda em laranja claro para indicar interatividade
   },
   botaoAtivo: {
-    backgroundColor: '#555555',
+    backgroundColor: '#FF8A47', // Estado ativo (Call to Action): Laranja claro vibrante preenchido
+    borderColor: 'transparent',  // Remove a necessidade da borda antiga ao preencher
   },
   texto: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: '#FF9F63', // Texto em laranja claro para contrastar com o fundo vinho padrão
+  },
+  textoAtivo: {
+    color: '#1A0B11', // Texto em vinho bem escuro para contrastar com o botão todo laranja
   },
 });

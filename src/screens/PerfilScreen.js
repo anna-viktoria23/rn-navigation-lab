@@ -52,10 +52,10 @@ export default function PerfilScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#1A0B11", // Vinho bem escuro/fechado para o fundo do app
   },
   header: {
-    backgroundColor: "#333333",
+    backgroundColor: "#2C0E1A", // Bordô profundo para o cabeçalho
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 24,
@@ -63,51 +63,52 @@ const styles = StyleSheet.create({
   headerTitulo: {
     fontSize: 26,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "#FFFFFF", // Branco puro para destaque total do título
   },
   cartao: {
     margin: 16,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#2C0E1A", // Bordô profundo para destacar do container
     borderRadius: 16,
     padding: 24,
     alignItems: "center",
+    // Sombra adaptada para o tema escuro (mais sutil para dar profundidade)
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6,
   },
   avatar: {
     width: 88,
     height: 88,
     borderRadius: 44,
-    backgroundColor: "#E0E0E0",
+    backgroundColor: "#421625", // Tom de vinho intermediário
     alignItems: "center",
-    justifyContent: "center",
+    justify: "center",
     borderWidth: 3,
-    borderColor: "#AAAAAA",
+    borderColor: "#FF9F63", // Laranja claro vibrante na borda para o "glow" gamer
     marginBottom: 16,
   },
   avatarTexto: {
     fontSize: 36,
     fontWeight: "bold",
-    color: "#555555",
+    color: "#FF9F63", // Letras iniciais em laranja claro
   },
   nome: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#1A1A1A",
+    color: "#FFFFFF", // Branco para contraste no tema escuro
     marginBottom: 4,
   },
   email: {
     fontSize: 14,
-    color: "#888888",
+    color: "#D6C5CB", // Cinza levemente rosado/vinho para leitura suave
     marginBottom: 20,
   },
   separador: {
     width: "100%",
     height: 1,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#421625", // Linha sutil separando as informações
     marginBottom: 16,
   },
   infoLinha: {
@@ -118,16 +119,16 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 14,
-    color: "#555555",
+    color: "#A8929B", // Texto secundário atenuado
   },
   infoValor: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#333333",
+    color: "#FFBF94", // Laranja claro pastel para os dados de perfil se destacarem
   },
   botao: {
     marginHorizontal: 16,
-    backgroundColor: "#333333",
+    backgroundColor: "#FF8A47", // Laranja claro principal (Call to Action)
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: "center",
@@ -135,6 +136,6 @@ const styles = StyleSheet.create({
   botaoTexto: {
     fontSize: 15,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "#1A0B11", // Texto escuro dentro do botão claro para garantir leitura
   },
 });

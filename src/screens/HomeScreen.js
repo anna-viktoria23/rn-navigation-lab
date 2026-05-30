@@ -1,6 +1,5 @@
-// TODO: estilizar esta tela com as cores e identidade visual do seu tema
-// TODO: importar useState e useEffect — adicione a linha abaixo no topo:
-// import { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -72,25 +71,25 @@ const jogos = [
 // TODO: adicionar { navigation } como parametro quando a navegacao estiver configurada
 export default function HomeScreen() {
   // TODO: estado para o texto digitado na busca
-  // const [busca, setBusca] = useState('');
+  const [busca, setBusca] = useState('');
 
   // TODO: estado com os jogos exibidos na lista — inicia com todos
-  // const [jogosFiltrados, setJogosFiltrados] = useState(jogos);
+  const [jogosFiltrados, setJogosFiltrados] = useState(jogos);
 
   // TODO: filtrar os jogos sempre que o valor de 'busca' mudar
-  // useEffect(() => {
-  //   const resultado = jogos.filter((jogo) =>
-  //     jogo.titulo.toLowerCase().includes(busca.toLowerCase())
-  //   );
-  //   setJogosFiltrados(resultado);
-  // }, [busca]);
+  useEffect(() => {
+    const resultado = jogos.filter((jogo) =>
+       jogo.titulo.toLowerCase().includes(busca.toLowerCase())
+     );
+     setJogosFiltrados(resultado);
+   }, [busca]);
 
   function renderItem({ item }) {
     return (
       <TouchableOpacity
         style={styles.card}
         // TODO: implementar onPress com navigation.navigate passando os dados do jogo
-        // onPress={() => navigation.navigate('Detalhe', { ...item })}
+         onPress={() => navigation.navigate('Detalhe', { ...item })}
       >
         <View style={styles.cardIcone}>
           {/* TODO: substituir pela inicial do titulo ou outro elemento do seu tema */}
@@ -121,14 +120,14 @@ export default function HomeScreen() {
           style={styles.buscaInput}
           placeholder="Buscar jogo..."
           placeholderTextColor="#999"
-          // value={busca}
-          // onChangeText={setBusca}
+          value={setBusca}
+          onChangeText={setBusca}
         />
       </View>
 
       {/* TODO: trocar data={jogos} por data={jogosFiltrados} apos implementar o estado */}
       <FlatList
-        data={jogos}
+        data={jogosFiltrados}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.lista}
@@ -141,26 +140,26 @@ export default function HomeScreen() {
 // TODO: estilizar com as cores e identidade visual do seu tema
 const styles = StyleSheet.create({
   buscaContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#2C0E1A', // Bordô profundo acompanhando o cabeçalho
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    borderBottomColor: '#421625', // Linha divisória sutil em tom de vinho
   },
   buscaInput: {
-    backgroundColor: '#F0F0F0',
+    backgroundColor: '#3D1525', // Tom de bordô um pouco mais claro para destacar o campo de input
     borderRadius: 8,
     paddingHorizontal: 14,
     paddingVertical: 10,
     fontSize: 14,
-    color: '#1A1A1A',
+    color: '#FFFFFF', // Texto digitado em branco para contraste perfeito
   },
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#1A0B11', // Vinho bem escuro padrão para o fundo do app
   },
   header: {
-    backgroundColor: '#333333',
+    backgroundColor: '#2C0E1A', // Bordô profundo para o cabeçalho principal
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 24,
@@ -168,11 +167,11 @@ const styles = StyleSheet.create({
   headerTitulo: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: '#FFFFFF', // Branco puro
   },
   headerSubtitulo: {
     fontSize: 13,
-    color: '#CCCCCC',
+    color: '#A8929B', // Cinza-vinho suave para o subtítulo do catálogo
     marginTop: 4,
   },
   lista: {
@@ -182,28 +181,31 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#2C0E1A', // Bordô nos cards para "saltarem" sobre o fundo vinho escuro
     borderRadius: 12,
     padding: 14,
+    // Sombra adaptada e mais suave para interfaces escuras
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    elevation: 4,
   },
   cardIcone: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#421625', // Fundo do ícone em vinho intermediário
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 14,
+    borderWidth: 1,
+    borderColor: '#FF9F63', // Detalhe fino em laranja claro simulando um "slot" de jogo ativo
   },
   cardIconeTexto: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#555555',
+    color: '#FF9F63', // Texto/Iniciais do jogo em laranja claro
   },
   cardInfo: {
     flex: 1,
@@ -211,11 +213,11 @@ const styles = StyleSheet.create({
   cardTitulo: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#1A1A1A',
+    color: '#FFFFFF', // Nome do jogo em destaque com branco puro
     marginBottom: 4,
   },
   cardSubtitulo: {
     fontSize: 13,
-    color: '#888888',
+    color: '#FFBF94', // Categoria/Plataforma do jogo em laranja claro pastel
   },
 });

@@ -1,12 +1,11 @@
+
 // TODO: estilizar esta tela com as cores e identidade visual do seu tema
 
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 1. Importado o useEffect
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 // TODO: apos criar o componente CardJogo, importe-o aqui:
-// import { CardJogo } from '../components';
+import { CardJogo } from '../components';
 
-// Dados de exemplo para voce visualizar o renderItem funcionando
-// Em um app real, esses itens chegariam via route.params enviados pela DetalheScreen
 const jogosMock = [
   {
     id: "1",
@@ -24,13 +23,22 @@ const jogosMock = [
   },
 ];
 
-export default function ListaScreen({ route }) {
+export default function ListaScreen({ route, navigation }) {
   const [itensSalvos, setItensSalvos] = useState(jogosMock);
 
-  // Para receber um jogo salvo da DetalheScreen via route.params:
-  // if (route.params?.novoJogo) {
-  //   setItensSalvos(prev => [...prev, route.params.novoJogo]);
-  // }
+  // 2. CORREÇÃO DO LOOP: Captura o novo jogo de forma segura usando useEffect
+  useEffect(() => {
+    if (route.params?.novoJogo) {
+      const jogoExiste = itensSalvos.some(jogo => jogo.id === route.params.novoJogo.id);
+      
+      if (!jogoExiste) {
+        setItensSalvos(prev => [...prev, route.params.novoJogo]);
+      }
+
+      // Limpa os parâmetros para não adicionar o mesmo jogo se a tela resetar
+      navigation.setParams({ novoJogo: undefined });
+    }
+  }, [route.params?.novoJogo]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,11 +51,16 @@ export default function ListaScreen({ route }) {
         data={itensSalvos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          // TODO: crie o arquivo src/components/CardJogo.js
-          // O componente CardJogo deve receber as props: titulo, genero, plataforma e nota
-          // Depois substitua este bloco por:
-          // <CardJogo titulo={item.titulo} genero={item.genero} plataforma={item.plataforma} nota={item.nota} />
-          <View style={styles.card} />
+          // 3. OTIMIZAÇÃO: O estilo de card idealmente vai dentro do próprio componente,
+          // mas mantive a View externa caso precise controlar margens na lista.
+          <View style={styles.cardContainer}>
+            <CardJogo 
+              titulo={item.titulo} 
+              genero={item.genero} 
+              plataforma={item.plataforma} 
+              nota={item.nota} 
+            />
+          </View>
         )}
         ListEmptyComponent={
           <View style={styles.conteudo}>
@@ -72,10 +85,10 @@ export default function ListaScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#1A0B11", // Vinho bem escuro para o fundo da lista
   },
   header: {
-    backgroundColor: "#333333",
+    backgroundColor: "#2C0E1A", // Bordô profundo para o cabeçalho
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 24,
@@ -83,7 +96,7 @@ const styles = StyleSheet.create({
   headerTitulo: {
     fontSize: 26,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "#FFFFFF", // Branco puro para destaque total do título
   },
   listaVazia: {
     flex: 1,
@@ -98,41 +111,40 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 48,
-    backgroundColor: "#E0E0E0",
+    backgroundColor: "#2C0E1A", // Recipiente em bordô para contrastar com o fundo
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: "#421625", // Borda sutil de acabamento
   },
   icone: {
     fontSize: 40,
     fontWeight: "bold",
-    color: "#555555",
+    color: "#FF9F63", // Laranja claro para dar o destaque de "alerta" ou vazio
   },
   titulo: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#1A1A1A",
+    color: "#FFFFFF", // Branco para contraste e leitura imediata
     marginBottom: 8,
     textAlign: "center",
   },
   descricao: {
     fontSize: 16,
-    color: "#555555",
+    color: "#FFBF94", // Laranja claro pastel para chamar atenção suavemente
     fontWeight: "600",
     textAlign: "center",
     marginBottom: 12,
   },
   dica: {
     fontSize: 13,
-    color: "#888888",
+    color: "#A8929B", // Cinza-vinho suave para o texto secundário/dica de suporte
     textAlign: "center",
     lineHeight: 20,
   },
-  card: {
-    backgroundColor: "#FFFFFF",
+  cardContainer: {
     marginHorizontal: 16,
     marginTop: 12,
-    borderRadius: 8,
-    padding: 16,
   },
 });
